@@ -8,7 +8,9 @@ authors:
 - Michael Joseph Rosenthal <rosenthalm93@gmail.com>
 homepage: https://github.com/zino-app/graphql-flutter/tree/master/packages/graphql_flutter
 dependencies:
-  graphql: ^3.0.0-beta.3
+#  graphql: ^3.0.0-beta.3
+  # TEMP allow pulling fork from git
+  graphql:
   flutter:
     sdk: flutter
   meta: ^1.1.6
