@@ -71,8 +71,10 @@ class QueryManager {
     String queryId,
     BaseOptions options,
   ) async {
-    final MultiSourceResult allResults =
-        fetchQueryAsMultiSourceResult(queryId, options);
+    final MultiSourceResult allResults = fetchQueryAsMultiSourceResult(
+      queryId,
+      options,
+    );
     return allResults.networkResult ?? allResults.eagerResult;
   }
 
@@ -218,9 +220,14 @@ class QueryManager {
     return queryResult;
   }
 
+  /// Refetch from the network unless FetchPolicy is cacheOnly
+  ///
   Future<QueryResult> refetchQuery(String queryId) {
     final WatchQueryOptions options = queries[queryId].options;
-    return fetchQuery(queryId, options);
+
+    return options.fetchPolicy == FetchPolicy.cacheOnly
+        ? _resolveQueryEagerly(queryId, options)
+        : _resolveQueryOnNetwork(queryId, options);
   }
 
   ObservableQuery getQuery(String queryId) {
