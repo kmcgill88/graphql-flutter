@@ -50,7 +50,7 @@ class DefaultPolicies {
         this.mutate = _mutateDefaults.withOverrides(mutate);
 
   static final _watchQueryDefaults = Policies.safe(
-    FetchPolicy.cacheAndNetwork,
+    FetchPolicy.cacheFirst,
     ErrorPolicy.none,
   );
 
